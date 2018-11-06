@@ -6,13 +6,7 @@ pipeline {
   }
 
   stages {
-    stage('Say Hello') {
-      agent any
-
-      steps {
-        sayHello 'Awesome Student!'
-      }
-    }
+    
     stage('Git Information') {
       agent any
 
@@ -20,7 +14,7 @@ pipeline {
         echo "My Branch Name: ${env.BRANCH_NAME}"
         }
       }
-    }
+    
     stage('Unit Tests') {
       agent {
         label 'apache'
