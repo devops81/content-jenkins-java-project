@@ -45,7 +45,7 @@ pipeline {
       }
       steps {
         sh "if ![ -d '/var/www/html/rectangles/all/${env.BRANCH_NAME}' ]; then mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}; fi"
-        sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}
+        sh "cp dist/rectangle_1.8.jar
         /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
       }
     }
@@ -63,7 +63,7 @@ pipeline {
         docker 'openjdk:8u121-jre'
       }
       steps {
-        sh "wget  http://devops816.mylabserver.com//rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+        sh "wget  http://devops816.mylabserver.com//rectangles/all/${env.BRANCH_NAME}/rectangle_1.8.jar"
         sh "java -jar rectangle_1.8.jar 3 4"
       }
     }
