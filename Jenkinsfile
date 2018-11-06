@@ -45,7 +45,8 @@ pipeline {
       }
       steps {
         sh "if ![ -d '/var/www/html/rectangles/all/${env.BRANCH_NAME}' ]; then mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}; fi"
-        sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
+        sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}
+        /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
       }
     }
     stage("Running on CentOS") {
@@ -53,8 +54,8 @@ pipeline {
         label 'CentOS'
       }
       steps {
-        sh "wget  http://devops816.mylabserver.com//rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
-        sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
+        sh "wget  http://devops815.mylabserver.com:8080/job/JunitExample/8/artifact/dist/rectangle_1.8.jar"
+        sh "java -jar rectangle_1.8.jar 3 4"
       }
     }
     stage("Test on Debian") {
@@ -63,7 +64,7 @@ pipeline {
       }
       steps {
         sh "wget  http://devops816.mylabserver.com//rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
-        sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
+        sh "java -jar rectangle_1.8.jar 3 4"
       }
     }
     stage('Promote to Green') {
@@ -74,7 +75,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        sh "cp /var/www/html/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+        sh "cp /var/www/html/rectangles/all/${env.BRANCH_NAME}/rectangle_1.8.jar /var/www/html/rectangles/green/rectangle_1.8.jar"
       }
     }
     stage('Promote Development Branch to Master') {
